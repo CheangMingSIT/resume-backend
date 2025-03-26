@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AppDto } from './dtos/app.dtos';
 
@@ -12,5 +12,10 @@ export class AppController {
     return {
       message: response,
     };
+  }
+
+  @Get()
+  async getHelloWorld() {
+    return 'Hello World!';
   }
 }
