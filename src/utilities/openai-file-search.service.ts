@@ -6,7 +6,7 @@ import OpenAI from 'openai';
 export class OpenAiFileSearchService implements OnModuleInit {
   constructor(private readonly openai: OpenAI) {}
   async onModuleInit() {
-    const fileId = await this.createFile('asset/CheangMing.pdf');
+    const fileId = await this.createFile('../../asset/CheangMing.pdf');
     console.log(fileId);
     const vectorStore = await this.openai.vectorStores.create({
       name: 'knowledge_base',
