@@ -1,17 +1,18 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import * as fs from 'fs';
 import OpenAI from 'openai';
+import * as path from 'path';
 
 @Injectable()
 export class OpenAiFileSearchService implements OnModuleInit {
   constructor(private readonly openai: OpenAI) {}
   async onModuleInit() {
-    const fileId = await this.createFile('./asset/CheangMing.pdf');
-    console.log(fileId);
+    let filePath = path.join(process.cwd(), 'asset', 'CheangMing.pdf');
+    const fileId = await this.createFile(filePath);
     const vectorStore = await this.openai.vectorStores.create({
       name: 'knowledge_base',
     });
-    console.log(vectorStore.id);
+    console.log();
     await this.openai.vectorStores.files.create(vectorStore.id, {
       file_id: fileId,
     });
