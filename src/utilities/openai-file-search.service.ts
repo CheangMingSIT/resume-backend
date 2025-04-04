@@ -10,9 +10,9 @@ export class OpenAiFileSearchService implements OnModuleInit {
     let filePath = path.join(process.cwd(), 'asset', 'CheangMing.pdf');
     const fileId = await this.createFile(filePath);
     const vectorStore = await this.openai.vectorStores.create({
-      name: 'knowledge_base',
+      name: 'resume_knowledge_base',
     });
-    console.log();
+
     await this.openai.vectorStores.files.create(vectorStore.id, {
       file_id: fileId,
     });
@@ -39,6 +39,7 @@ export class OpenAiFileSearchService implements OnModuleInit {
         purpose: 'assistants',
       });
     }
+    console.log('File created:', result.id);
     return result.id;
   }
 }
